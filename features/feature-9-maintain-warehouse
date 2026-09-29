@@ -1,0 +1,80 @@
+# Feature: Maintain Warehouse
+
+**Feature ID:** 9
+**Branch pattern:** `feature/9-maintain-warehouse`
+**Status:** Draft
+**Created:** 2026-09-28
+**Input:** Manage warehouse facilities and tie them to parent companies.
+
+## User Stories
+
+### US-9.1: Add warehouse
+**As a** Manager
+**I want to** add a warehouse facility
+**So that** we can track location-based stock.
+
+**Priority:** P1
+**Independent test:** Create a warehouse with a Warehouse ID and linked Company, then check that it saves[cite: 1, 2].
+**Acceptance scenarios:** see ### US-9.1 under Acceptance Criteria
+
+### US-9.2: Update warehouse
+**As a** Manager
+**I want to** update warehouse details
+**So that** company relationships stay correct.
+
+**Priority:** P1
+**Independent test:** Change the linked company on a warehouse record and check that it saves[cite: 1, 2].
+**Acceptance scenarios:** see ### US-9.2 under Acceptance Criteria
+
+### US-9.3: Delete warehouse
+**As a** Manager
+**I want to** delete a warehouse
+**So that** closed facilities are removed.
+
+**Priority:** P2
+**Independent test:** Delete a warehouse record and verify it is gone.
+**Acceptance scenarios:** see ### US-9.3 under Acceptance Criteria
+
+## Requirements
+
+### Functional Requirements
+
+*   **FR-001**: Managers MUST be able to Add, Delete, and Update warehouse records.
+*   **FR-002**: Warehouse records MUST include Warehouse ID and Company assignment.
+
+## Key Entities
+
+*   **Warehouse**: A physical facility storing inventory.
+*   **Manager**: The person managing warehouse profiles.
+
+## Data Model Requirements
+
+### `warehouses` table
+| Field | Type | Rules |
+|-------|------|-------|
+| `id` | INTEGER PK | Auto-increment |
+| `warehouse_id` | STRING | Required, Unique |
+| `company_id` | INTEGER FK | Required, references `companies.id`[cite: 1, 2] |
+
+## Acceptance Criteria
+
+### US-9.1 — Add warehouse
+
+#### Scenario: Manager adds a warehouse
+*   **Given** I am logged in as a Manager
+*   **When** I enter a Warehouse ID and select a Company
+*   **Then** the warehouse record is created
+
+### US-9.2 — Update warehouse
+
+#### Scenario: Manager changes company mapping
+*   **Given** a warehouse record exists
+*   **When** I edit the assigned Company
+*   **Then** the warehouse record shows the new Company
+
+### US-9.3 — Delete warehouse
+
+#### Scenario: Manager deletes a warehouse
+*   **Given** a warehouse record exists
+*   **When** I click delete
+*   **Then** the warehouse is removed from the system

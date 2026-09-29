@@ -1,0 +1,85 @@
+# Feature: Maintain Customers
+
+**Feature ID:** 6
+**Branch pattern:** `feature/6-maintain-customers`
+**Status:** Draft
+**Created:** 2026-09-28
+**Input:** Manage customer profiles, contact information, store IDs, and shipment timing requirements.
+
+## User Stories
+
+### US-6.1: Add customer profile
+**As an** Office Worker
+**I want to** add new customer info
+**So that** we can process their orders.
+
+**Priority:** P1
+**Independent test:** Save a customer profile with Name, Store ID, and Phone Number, then verify it exists[cite: 1, 2].
+**Acceptance scenarios:** see ### US-6.1 under Acceptance Criteria
+
+### US-6.2: Update customer profile
+**As an** Office Worker
+**I want to** update customer details
+**So that** phone numbers and delivery dates stay accurate.
+
+**Priority:** P1
+**Independent test:** Change a customer's phone number and check that it saves[cite: 1, 2].
+**Acceptance scenarios:** see ### US-6.2 under Acceptance Criteria
+
+### US-6.3: Delete customer profile
+**As an** Office Worker
+**I want to** delete customer records
+**So that** inactive client profiles are cleaned up.
+
+**Priority:** P2
+**Independent test:** Delete a customer record and check that it no longer appears.
+**Acceptance scenarios:** see ### US-6.3 under Acceptance Criteria
+
+## Requirements
+
+### Functional Requirements
+
+*   **FR-001**: Users MUST be able to Add, Update, and Delete customer records.
+*   **FR-002**: Customer records MUST store Address, Order form, Name, Phone #, Store ID, Date Ordered, and Shipment needed by.
+
+## Key Entities
+
+*   **Customer**: A client or store purchasing items from stock.
+*   **Office Worker**: The person maintaining customer data and forms.
+
+## Data Model Requirements
+
+### `customers` table
+| Field | Type | Rules |
+|-------|------|-------|
+| `id` | INTEGER PK | Auto-increment |
+| `name` | STRING | Required |
+| `address` | STRING | Required |
+| `phone` | STRING | Required |
+| `store_id` | STRING | Required, Unique |
+| `order_form` | TEXT | Optional |
+| `date_ordered` | DATE | Required |
+| `shipment_needed_by` | DATE | Required |
+
+## Acceptance Criteria
+
+### US-6.1 — Add customer profile
+
+#### Scenario: Office Worker adds a new customer
+*   **Given** I am logged in as an Office Worker
+*   **When** I fill in Name, Address, Phone #, Store ID, Date Ordered, and Shipment needed by
+*   **Then** the customer details are stored in the database
+
+### US-6.2 — Update customer profile
+
+#### Scenario: Office Worker edits shipment date
+*   **Given** a customer record exists
+*   **When** I update the Shipment needed by date
+*   **Then** the updated date displays on the customer profile
+
+### US-6.3 — Delete customer profile
+
+#### Scenario: Office Worker deletes a customer
+*   **Given** a customer record exists
+*   **When** I delete the customer record
+*   **Then** the profile is gone from the database

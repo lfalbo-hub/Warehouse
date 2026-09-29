@@ -1,0 +1,82 @@
+# Feature: Maintain Routes
+
+**Feature ID:** 8
+**Branch pattern:** `feature/8-maintain-routes`
+**Status:** Draft
+**Created:** 2026-09-28
+**Input:** Manage delivery routes, drivers, assigned shipments, and delivery addresses.
+
+## User Stories
+
+### US-8.1: Add delivery routes
+**As an** Office Worker
+**I want to** add delivery routes
+**So that** drivers know where to deliver shipments.
+
+**Priority:** P1
+**Independent test:** Add a new route with assigned drivers and addresses, then verify it saves[cite: 1, 2].
+**Acceptance scenarios:** see ### US-8.1 under Acceptance Criteria
+
+### US-8.2: Update delivery routes
+**As an** Office Worker
+**I want to** update routes
+**So that** driver assignments and stop addresses can change.
+
+**Priority:** P1
+**Independent test:** Reassign a driver on a route and verify the update[cite: 1, 2].
+**Acceptance scenarios:** see ### US-8.2 under Acceptance Criteria
+
+### US-8.3: Delete delivery routes
+**As an** Office Worker
+**I want to** delete routes
+**So that** old routes are cleared out.
+
+**Priority:** P2
+**Independent test:** Delete a route record and verify it no longer shows up.
+**Acceptance scenarios:** see ### US-8.3 under Acceptance Criteria
+
+## Requirements
+
+### Functional Requirements
+
+*   **FR-001**: Office Workers MUST be able to Add, Update, and Delete delivery routes.
+*   **FR-002**: Routes MUST link Delivery Routes, Drivers, Shipment details, and Addresses.
+
+## Key Entities
+
+*   **Delivery Route**: A designated path mapping shipments and addresses to drivers.
+*   **Office Worker**: The person managing delivery planning.
+
+## Data Model Requirements
+
+### `routes` table
+| Field | Type | Rules |
+|-------|------|-------|
+| `id` | INTEGER PK | Auto-increment |
+| `route_name` | STRING | Required |
+| `drivers` | STRING | Required |
+| `shipment` | STRING | Required |
+| `addresses` | TEXT | Required |
+
+## Acceptance Criteria
+
+### US-8.1 — Add delivery routes
+
+#### Scenario: Office Worker adds a route
+*   **Given** I am logged in as an Office Worker
+*   **When** I input Route Name, Drivers, Shipment info, and Addresses
+*   **Then** the route record is saved
+
+### US-8.2 — Update delivery routes
+
+#### Scenario: Office Worker updates a driver assignment
+*   **Given** a route exists
+*   **When** I pick a different driver for the route
+*   **Then** the route updates with the new driver
+
+### US-8.3 — Delete delivery routes
+
+#### Scenario: Office Worker deletes a route
+*   **Given** a route exists
+*   **When** I delete the route
+*   **Then** the route is removed from the database

@@ -1,0 +1,85 @@
+# Feature: Maintain Customer Orders
+
+**Feature ID:** 7
+**Branch pattern:** `feature/7-maintain-customer-orders`
+**Status:** Draft
+**Created:** 2026-09-28
+**Input:** Manage customer order forms, prices, taxes, ship dates, and customer communication.
+
+## User Stories
+
+### US-7.1: Add customer orders
+**As a** Customer
+**I want to** place orders online
+**So that** I can buy stock from the warehouse.
+
+**Priority:** P1
+**Independent test:** Submit an order form with an item list and sales price, then check that it saves[cite: 1, 2].
+**Acceptance scenarios:** see ### US-7.1 under Acceptance Criteria
+
+### US-7.2: Update customer orders
+**As an** Office Worker
+**I want to** update customer order details
+**So that** tax info and ship dates stay accurate.
+
+**Priority:** P1
+**Independent test:** Modify the Ship by date on an existing order and check that it updates[cite: 1, 2].
+**Acceptance scenarios:** see ### US-7.2 under Acceptance Criteria
+
+### US-7.3: Delete customer orders
+**As an** Office Worker
+**I want to** delete orders
+**So that** canceled purchases are removed.
+
+**Priority:** P2
+**Independent test:** Delete a customer order and verify it is removed.
+**Acceptance scenarios:** see ### US-7.3 under Acceptance Criteria
+
+## Requirements
+
+### Functional Requirements
+
+*   **FR-001**: System MUST process Online Order Forms and support Add, Update, and Delete operations.
+*   **FR-002**: Orders MUST track Day ordered, Ship by date, Item List, Sales Price, and Tax info.
+*   **FR-003**: Office Workers MUST be able to send forms to customers and mark orders as Received.
+
+## Key Entities
+
+*   **Customer Order**: A sales order placed by a customer.
+*   **Customer**: The person ordering stock.
+*   **Office Worker**: The person fulfilling orders and communicating forms.
+
+## Data Model Requirements
+
+### `customer_orders` table
+| Field | Type | Rules |
+|-------|------|-------|
+| `id` | INTEGER PK | Auto-increment |
+| `day_ordered` | DATE | Required |
+| `ship_by_date` | DATE | Required |
+| `item_list` | TEXT | Required |
+| `sales_price` | DECIMAL | Required |
+| `tax_info` | DECIMAL | Required |
+
+## Acceptance Criteria
+
+### US-7.1 — Add customer orders
+
+#### Scenario: Customer places an order online
+*   **Given** I am filling out an Online Order Form
+*   **When** I pick my Item List and submit
+*   **Then** the system calculates Sales Price and Tax info and saves the order
+
+### US-7.2 — Update customer orders
+
+#### Scenario: Office Worker updates ship date
+*   **Given** a customer order is received[cite: 1, 2]
+*   **When** I change the Ship by date
+*   **Then** the order updates with the new date
+
+### US-7.3 — Delete customer orders
+
+#### Scenario: Office Worker removes an order
+*   **Given** an order exists
+*   **When** I click delete
+*   **Then** the order is removed from the database

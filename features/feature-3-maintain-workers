@@ -1,0 +1,84 @@
+# Feature: Maintain Workers
+
+**Feature ID:** 3
+**Branch pattern:** `feature/3-maintain-workers`
+**Status:** Draft
+**Created:** 2026-09-28
+**Input:** Manage warehouse workers, their roles, pay, and time tracking.
+
+## User Stories
+
+### US-3.1: Add worker records
+**As a** Manager
+**I want to** add workers
+**So that** I can track their job details.
+
+**Priority:** P1
+**Independent test:** Create a worker profile and see that it saves.
+**Acceptance scenarios:** see ### US-3.1 under Acceptance Criteria
+
+### US-3.2: Edit worker records
+**As a** Manager
+**I want to** edit worker info
+**So that** I can update payroll and PTO.
+
+**Priority:** P1
+**Independent test:** Change a worker's PTO and check that it updates.
+**Acceptance scenarios:** see ### US-3.2 under Acceptance Criteria
+
+### US-3.3: Delete worker records
+**As a** Manager
+**I want to** delete workers
+**So that** I can remove people who left the company.
+
+**Priority:** P2
+**Independent test:** Delete a worker profile and make sure they are gone from the roster.
+**Acceptance scenarios:** see ### US-3.3 under Acceptance Criteria
+
+## Requirements
+
+### Functional Requirements
+
+*   **FR-001**: Managers MUST be able to add, edit, and delete workers.
+*   **FR-002**: Worker profiles MUST include Roles, Time sheets, Pay roll, Bonus, and PTO.
+*   **FR-003**: The system MUST let Managers assign roles like Manager, Office Worker, Picker, or Docker.
+
+## Key Entities
+
+*   **Worker**: A warehouse employee.
+*   **Manager**: The person managing the workers.
+
+## Data Model Requirements
+
+### `workers` table
+| Field | Type | Rules |
+|-------|------|-------|
+| `id` | INTEGER PK | Auto-increment |
+| `roles` | STRING | Required (Manager, Office Worker, Picker, Docker) |
+| `time_sheets` | TEXT | [NEEDS CLARIFICATION: exact format][cite: 1, 2] |
+| `pay_roll` | DECIMAL | Required |
+| `bonus` | DECIMAL | Required |
+| `pto` | INTEGER | Required |
+
+## Acceptance Criteria
+
+### US-3.1 — Add worker records
+
+#### Scenario: Manager adds a new worker
+*   **Given** I am logged in as a Manager
+*   **When** I fill out the worker's Roles, Time sheets, Pay roll, Bonus, and PTO
+*   **Then** the worker profile saves successfully
+
+### US-3.2 — Edit worker records
+
+#### Scenario: Manager updates worker PTO
+*   **Given** a worker profile exists
+*   **When** I edit the PTO
+*   **Then** the new PTO balance is saved
+
+### US-3.3 — Delete worker records
+
+#### Scenario: Manager deletes a worker
+*   **Given** a worker profile exists
+*   **When** I click delete
+*   **Then** the worker profile disappears from the database

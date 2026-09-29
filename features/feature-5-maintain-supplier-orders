@@ -1,0 +1,84 @@
+# Feature: Maintain Supplier Orders
+
+**Feature ID:** 5
+**Branch pattern:** `feature/5-maintain-supplier-orders`
+**Status:** Draft
+**Created:** 2026-09-28
+**Input:** Track stock levels, generate stock orders for low items, and maintain supplier order records.
+
+## User Stories
+
+### US-5.1: Order low stock items
+**As a** Manager
+**I want to** send order requests for items running low
+**So that** the warehouse stays stocked.
+
+**Priority:** P1
+**Independent test:** Create a supplier order for low stock items and verify it saves[cite: 1, 2].
+**Acceptance scenarios:** see ### US-5.1 under Acceptance Criteria
+
+### US-5.2: Edit supplier orders
+**As a** Manager
+**I want to** update supplier order details
+**So that** item counts and inventory tracks stay current.
+
+**Priority:** P1
+**Independent test:** Modify item amounts on an existing order and check updates[cite: 1, 2].
+**Acceptance scenarios:** see ### US-5.2 under Acceptance Criteria
+
+### US-5.3: Delete supplier orders
+**As a** Manager
+**I want to** delete supplier orders
+**So that** canceled orders are removed.
+
+**Priority:** P2
+**Independent test:** Delete an order and verify it is removed from inventory tracking[cite: 1, 2].
+**Acceptance scenarios:** see ### US-5.3 under Acceptance Criteria
+
+## Requirements
+
+### Functional Requirements
+
+*   **FR-001**: The system MUST let Managers send in orders for low stock.
+*   **FR-002**: The system MUST calculate current item stock automatically.
+*   **FR-003**: The system MUST track bought items back into inventory.
+*   **FR-004**: Users MUST be able to add, edit, and delete supplier orders.
+
+## Key Entities
+
+*   **Supplier Order**: An outbound order placed with a vendor for replacement stock.
+*   **Manager**: The person approving and creating supplier orders.
+
+## Data Model Requirements
+
+### `supplier_orders` table
+| Field | Type | Rules |
+|-------|------|-------|
+| `id` | INTEGER PK | Auto-increment |
+| `supplier_id` | INTEGER FK | Required, references `suppliers.id`[cite: 1, 2] |
+| `item_list` | TEXT | Required |
+| `stock_calculated` | INTEGER | System generated |
+| `order_status` | STRING | Required |
+
+## Acceptance Criteria
+
+### US-5.1 — Order low stock items
+
+#### Scenario: Manager orders low stock
+*   **Given** stock calculations indicate low inventory
+*   **When** I create and send a supplier order
+*   **Then** the order status records as sent and tracks bought items
+
+### US-5.2 — Edit supplier orders
+
+#### Scenario: Manager updates order quantity
+*   **Given** an active supplier order exists
+*   **When** I edit the item list quantities
+*   **Then** the stock calculations reflect the updated quantities
+
+### US-5.3 — Delete supplier orders
+
+#### Scenario: Manager cancels and deletes an order
+*   **Given** a supplier order exists
+*   **When** I choose to delete the order
+*   **Then** the order disappears from order history

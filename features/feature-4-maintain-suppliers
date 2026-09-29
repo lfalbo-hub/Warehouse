@@ -1,0 +1,85 @@
+# Feature: Maintain Suppliers
+
+**Feature ID:** 4
+**Branch pattern:** `feature/4-maintain-suppliers`
+**Status:** Draft
+**Created:** 2026-09-28
+**Input:** Manage supplier information, contact details, ordering steps, and catalog pricing.
+
+## User Stories
+
+### US-4.1: Add supplier records
+**As an** Office Worker
+**I want to** add a new supplier
+**So that** we can order parts from them.
+
+**Priority:** P1
+**Independent test:** Save a new supplier with vendor ID and catalog pricing, then check that it exists[cite: 1, 2].
+**Acceptance scenarios:** see ### US-4.1 under Acceptance Criteria
+
+### US-4.2: Edit supplier records
+**As an** Office Worker
+**I want to** update supplier info
+**So that** shipping timelines and prices stay accurate.
+
+**Priority:** P1
+**Independent test:** Change a supplier's shipping timeline and check that it updates[cite: 1, 2].
+**Acceptance scenarios:** see ### US-4.2 under Acceptance Criteria
+
+### US-4.3: Delete supplier records
+**As an** Office Worker
+**I want to** delete suppliers
+**So that** old vendors are removed.
+
+**Priority:** P2
+**Independent test:** Delete a supplier and check that they no longer show up.
+**Acceptance scenarios:** see ### US-4.3 under Acceptance Criteria
+
+## Requirements
+
+### Functional Requirements
+
+*   **FR-001**: Users MUST be able to add, edit, and delete suppliers.
+*   **FR-002**: Supplier info MUST track Name, Address, How to Order, Vendor ID, Shipping time line, and Supplier Catalog with Prices.
+
+## Key Entities
+
+*   **Supplier**: A third-party vendor providing warehouse inventory.
+*   **Office Worker**: The person managing supplier details.
+
+## Data Model Requirements
+
+### `suppliers` table
+| Field | Type | Rules |
+|-------|------|-------|
+| `id` | INTEGER PK | Auto-increment |
+| `name` | STRING | Required |
+| `address` | STRING | Required |
+| `how_to_order` | TEXT | Required |
+| `vendor_id` | STRING | Required, Unique |
+| `shipping_timeline` | STRING | Required |
+| `catalog_prices` | TEXT | Required |
+
+## Acceptance Criteria
+
+### US-4.1 — Add supplier records
+
+#### Scenario: Office Worker adds a supplier
+*   **Given** I am logged in as an Office Worker
+*   **When** I enter the Name, Address, How to Order, Vendor ID, Shipping time line, and Supplier Catalog prices
+*   **And** I save the form
+*   **Then** the new supplier is created in the database
+
+### US-4.2 — Edit supplier records
+
+#### Scenario: Office Worker updates shipping timeline
+*   **Given** a supplier exists
+*   **When** I change the Shipping time line
+*   **Then** the updated timeline saves to the record
+
+### US-4.3 — Delete supplier records
+
+#### Scenario: Office Worker deletes a supplier
+*   **Given** a supplier exists
+*   **When** I click delete
+*   **Then** the supplier record is removed

@@ -1,0 +1,90 @@
+# Feature: Maintain Inventory
+
+**Feature ID:** 1
+**Branch pattern:** `feature/1-maintain-inventory`
+**Status:** Draft
+**Created:** 2026-09-28
+**Input:** Keep the inventory database updated by adding, editing, and deleting records.
+
+## User Stories
+
+### US-1.1: Add inventory records
+**As an** Office Worker
+**I want to** add new inventory locations
+**So that** I can keep the database current.
+
+**Priority:** P1
+**Independent test:** Add a new inventory record and check that it saves.
+**Acceptance scenarios:** see ### US-1.1 under Acceptance Criteria
+
+### US-1.2: Edit inventory records
+**As an** Office Worker
+**I want to** edit inventory details
+**So that** bin and slot locations stay accurate.
+
+**Priority:** P1
+**Independent test:** Change a bin number and check that it updates.
+**Acceptance scenarios:** see ### US-1.2 under Acceptance Criteria
+
+### US-1.3: Delete inventory records
+**As an** Office Worker
+**I want to** delete inventory records
+**So that** old stock locations are removed.
+
+**Priority:** P2
+**Independent test:** Delete an inventory record and make sure it is gone.
+**Acceptance scenarios:** see ### US-1.3 under Acceptance Criteria
+
+## Requirements
+
+### Functional Requirements
+
+*   **FR-001**: Office Workers MUST be able to add, edit, and delete inventory records.
+*   **FR-002**: Inventory records MUST include the Name, Bin #, Slot #, Row #, SKU, UPC, Supplier, and Case.
+
+## Key Entities
+
+*   **Inventory**: Where items are kept and tracked in the warehouse.
+*   **Office Worker**: The person who updates the inventory database.
+
+## Data Model Requirements
+
+### `inventory` table
+| Field | Type | Rules |
+|-------|------|-------|
+| `id` | INTEGER PK | Auto-increment |
+| `name` | STRING | Required |
+| `bin_number` | STRING | Required |
+| `slot_number` | STRING | Required |
+| `row_number` | STRING | Required |
+| `sku` | STRING | Required |
+| `upc` | STRING | Required |
+| `supplier` | STRING | Required |
+| `case` | STRING | Required |
+
+## Acceptance Criteria
+
+### US-1.1 — Add inventory records
+
+#### Scenario: Office Worker adds a new inventory location
+*   **Given** I am logged in as an Office Worker
+*   **When** I type in the Name, Bin #, Slot #, Row #, SKU, UPC, Supplier, and Case
+*   **And** I submit the form
+*   **Then** the new record saves to the database
+
+### US-1.2 — Edit inventory records
+
+#### Scenario: Office Worker updates a bin number
+*   **Given** I am logged in as an Office Worker
+*   **And** an inventory record exists
+*   **When** I change the Bin #
+*   **And** I save it
+*   **Then** the database shows the new Bin #
+
+### US-1.3 — Delete inventory records
+
+#### Scenario: Office Worker removes an inventory record
+*   **Given** I am logged in as an Office Worker
+*   **And** an inventory record exists
+*   **When** I click delete
+*   **Then** the record disappears from the database

@@ -1,0 +1,83 @@
+# Feature: Maintain Company
+
+**Feature ID:** 10
+**Branch pattern:** `feature/10-maintain-company`
+**Status:** Draft
+**Created:** 2026-09-28
+**Input:** Manage top-level company info, contact data, and web presence.
+
+## User Stories
+
+### US-10.1: Add company profile
+**As a** Manager
+**I want to** add company profiles
+**So that** corporate contact details are stored.
+
+**Priority:** P1
+**Independent test:** Save a new company with Name, Address, Email, and Website, then verify it saves[cite: 1, 2].
+**Acceptance scenarios:** see ### US-10.1 under Acceptance Criteria
+
+### US-10.2: Update company profile
+**As a** Manager
+**I want to** update company details
+**So that** email addresses and phone numbers stay current.
+
+**Priority:** P1
+**Independent test:** Change the company phone number and verify the update[cite: 1, 2].
+**Acceptance scenarios:** see ### US-10.2 under Acceptance Criteria
+
+### US-10.3: Delete company profile
+**As a** Manager
+**I want to** delete company records
+**So that** inactive company entities are removed.
+
+**Priority:** P2
+**Independent test:** Delete a company record and make sure it is gone.
+**Acceptance scenarios:** see ### US-10.3 under Acceptance Criteria
+
+## Requirements
+
+### Functional Requirements
+
+*   **FR-001**: Managers MUST be able to Add, Update, and Delete company profiles.
+*   **FR-002**: Company profiles MUST store ID, Name, Address, Phone, Email, and Website.
+
+## Key Entities
+
+*   **Company**: The overarching organization running or owning warehouses.
+*   **Manager**: The person maintaining company organization details.
+
+## Data Model Requirements
+
+### `companies` table
+| Field | Type | Rules |
+|-------|------|-------|
+| `id` | INTEGER PK | Auto-increment |
+| `name` | STRING | Required |
+| `address` | STRING | Required |
+| `phone` | STRING | Required |
+| `email` | STRING | Required |
+| `website` | STRING | Required |
+
+## Acceptance Criteria
+
+### US-10.1 — Add company profile
+
+#### Scenario: Manager creates a company
+*   **Given** I am logged in as a Manager
+*   **When** I fill in Name, Address, Phone, Email, and Website
+*   **Then** the company profile is saved
+
+### US-10.2 — Update company profile
+
+#### Scenario: Manager updates company phone number
+*   **Given** a company profile exists
+*   **When** I change the Phone field
+*   **Then** the updated Phone saves to the company record
+
+### US-10.3 — Delete company profile
+
+#### Scenario: Manager removes a company
+*   **Given** a company profile exists
+*   **When** I delete the company profile
+*   **Then** the company record disappears from the database

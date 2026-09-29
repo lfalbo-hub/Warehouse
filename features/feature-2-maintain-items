@@ -1,0 +1,85 @@
+# Feature: Maintain Items
+
+**Feature ID:** 2
+**Branch pattern:** `feature/2-maintain-items`
+**Status:** Draft
+**Created:** 2026-09-28
+**Input:** Manage the item catalog by adding, updating, and deleting item info.
+
+## User Stories
+
+### US-2.1: Add new items
+**As an** Office Worker
+**I want to** add new items
+**So that** we can track them in the warehouse.
+
+**Priority:** P1
+**Independent test:** Add a new item with all its details and check that it saves.
+**Acceptance scenarios:** see ### US-2.1 under Acceptance Criteria
+
+### US-2.2: Update items
+**As an** Office Worker
+**I want to** update item details
+**So that** prices and descriptions stay correct.
+
+**Priority:** P1
+**Independent test:** Change an item's price and make sure it updates.
+**Acceptance scenarios:** see ### US-2.2 under Acceptance Criteria
+
+### US-2.3: Delete items
+**As an** Office Worker
+**I want to** delete items
+**So that** we can remove old products.
+
+**Priority:** P2
+**Independent test:** Delete an item and make sure it is gone from the list.
+**Acceptance scenarios:** see ### US-2.3 under Acceptance Criteria
+
+## Requirements
+
+### Functional Requirements
+
+*   **FR-001**: The system MUST let users add, update, and delete items.
+*   **FR-002**: Items MUST have a UPC, Price, SKU, Description, Supplier, and Quantity.
+
+## Key Entities
+
+*   **Item**: A product tracked in the warehouse.
+*   **Office Worker**: The person managing the item catalog.
+
+## Data Model Requirements
+
+### `items` table
+| Field | Type | Rules |
+|-------|------|-------|
+| `id` | INTEGER PK | Auto-increment |
+| `upc` | STRING | Required |
+| `price` | DECIMAL | Required |
+| `sku` | STRING | Required |
+| `description` | TEXT | Required |
+| `supplier` | STRING | Required |
+| `quantity` | INTEGER | Required |
+
+## Acceptance Criteria
+
+### US-2.1 — Add new items
+
+#### Scenario: Office Worker creates an item
+*   **Given** I am logged in as an Office Worker
+*   **When** I put in the UPC, Price, SKU, Description, Supplier, and Quantity
+*   **And** I save it
+*   **Then** the new item shows up in the database
+
+### US-2.2 — Update items
+
+#### Scenario: Office Worker updates an item's price
+*   **Given** an item exists
+*   **When** I change the Price
+*   **Then** the item record saves the new Price
+
+### US-2.3 — Delete items
+
+#### Scenario: Office Worker deletes an item
+*   **Given** an item exists
+*   **When** I click delete
+*   **Then** the item goes away entirely
